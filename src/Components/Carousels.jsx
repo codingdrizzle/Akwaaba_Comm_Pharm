@@ -7,12 +7,13 @@ import img5 from "../Images/5.jpg";
 import img6 from "../Images/6.jpg";
 import img7 from "../Images/7.jpg";
 import img8 from "../Images/8.jpg";
+import "../ComponentStyles/Carousels.css"
 
 function Carousels() {
   return (
     <>
       <Carousel
-        style={{ width: "75%", margin: "auto" }}
+        className="carousel-sizing"
         indicators={false}
         pause={false}
       >

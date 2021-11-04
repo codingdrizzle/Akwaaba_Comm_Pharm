@@ -1,4 +1,41 @@
-.backdrop{
-    height: 100%;
-    background-color: rgba(0,0,0,0.9);
+.backdrop {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.carousel-sizing {
+  width: 75%;
+  margin: auto;
+}
+@media screen and (max-width: 900px) {
+  /* *{
+            white-space: nowrap;
+        } */
+  .carousel-sizing {
+    width: 100%;
+  }
+  /* h1,
+  h3 {
+    font-size: 15px;
+
+  }
+  p {
+    font-size: 5px;
+  } */
+}
+
+@media screen and (max-width: 450px) {
+  .carousel-sizing {
+    width: 100%;
+  }
+  /* h1,
+  h3 {
+    font-size: 15px;
+  }
+  p {
+    font-size: 5px;
+  } */
+  .carousel-item{
+      left: 0;
+      right: 0;
+  }
 }

@@ -20,7 +20,7 @@ function NavBar() {
           <Navbar.Brand href="#home" className="">
             <img src={brandlogo} alt="" width="50px" />
             <a href="/" className="c-brand-text">
-              Akwaaba Community
+              Akwaaba Community Pharmacy
             </a>
           </Navbar.Brand>
           </Link>

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./App.css";
+// import "./App.css";
 import Home from "./Components/Home";
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
@@ -8,10 +8,9 @@ import About from "./Components/About";
 import NewsFeed from "./Components/NewsFeed";
 import HealthTips from "./Components/HealthTips";
 import Contact from "./Components/Contact";
-import {} from "react-bootstrap";
+import Blog from "../src/BlogComponents/Blog";
 
 function App() {
-
   return (
     <Router>
       <div>
@@ -24,7 +23,8 @@ function App() {
           <Route path="/contact" component={Contact} />
           <Home />
         </Switch>
-        <Footer/>
+        <Footer />
+        {/* <Route path="/blog" component={Blog} /> */}
       </div>
     </Router>
   );

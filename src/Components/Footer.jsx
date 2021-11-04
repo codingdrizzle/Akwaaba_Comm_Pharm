@@ -10,7 +10,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
 import "../ComponentStyles/Footer.css";
-import brandlogo from "../Images/logo1.png";
+import logoBig from "../Images/footer-logo-big.png";
+import logoSmall from "../Images/footer-logo-small.png";
 import brandlogotranswhite from "../Images/brandlogo-trans-white-small.png";
 
 function Footer() {
@@ -23,39 +24,40 @@ function Footer() {
   return (
     <>
       <div className="footer">
-        <Row className="bottomBorder">
-          <Col xs="12" md="12" lg="3">
-            <a href="/" className="footer-brand-text">
-              <img src={brandlogo} alt="" classNmae="footer-brand-logo" />
-              {/* <span className="footer-text">Akwaaba</span> <br />
-              <span className="footer-text">Community</span> */}
+        <Row className="bottomBorder py-3">
+          <Col xs="12" md="4" lg="3" className="brandlogo-parent">
+            <a href="/" className="footer-brand-text logo-big">
+              <img src={logoBig} alt="" classNmae="footer-brand-logo" />
+            </a>
+            <a href="/" className="footer-brand-text logo-small">
+              <img src={logoSmall} alt="" classNmae="footer-brand-logo" />
             </a>
           </Col>
-          <Col xs="6" md="6" lg="3">
+          <Col xs="12" md="4" lg="3">
             <div className="list">
               <h4 className="footer-tag">Related Links</h4>
               <ul>
-                <li>
+                <li className="footer-links">
                   <Link style={styleLink} to="/">
                     - Home -
                   </Link>
                 </li>
-                <li>
+                <li className="footer-links">
                   <Link style={styleLink} to="/about">
                     - About -
                   </Link>
                 </li>
-                <li>
+                <li className="footer-links">
                   <Link style={styleLink} to="/news-feed">
                     - News Feed -
                   </Link>
                 </li>
-                <li>
+                <li className="footer-links">
                   <Link style={styleLink} to="/health-tips">
                     - Health Tips -
                   </Link>
                 </li>
-                <li>
+                <li className="footer-links">
                   <Link style={styleLink} to="/contact">
                     - Contact -
                   </Link>
@@ -64,34 +66,35 @@ function Footer() {
             </div>
           </Col>
           {/* Categories */}
-          <Col xs="6" md="6" lg="3">
+          <Col xs="12" md="4" lg="3">
             <div className="list">
               <h4 className="footer-tag">Categories</h4>
               <ul className="text-left">
-                <li>Pharmaceutical</li>
-                <li>Drugs</li>
-                <li>Health</li>
+                <li className="categories">Pharmaceutical</li>
+                <li className="categories">Drugs</li>
+                <li className="categories">Health</li>
               </ul>
             </div>
           </Col>
-          <Col xs="6" md="5" lg="3">
+          {/* Working days */}
+          <Col xs="12" md="12" lg="3">
             <div className="list">
               <h4 className="footer-tag">Working Days</h4>
               <ul>
-                <li>Monday (Open 24 hours)</li>
-                <li>Tuesday (Open 24 hours)</li>
-                <li>Wednesday (Open 24 hours)</li>
-                <li>Thursday (Open 24 hours)</li>
-                <li>Friday (Open 24 hours)</li>
-                <li>Saturday (Open 24 hours)</li>
-                <li>Sunday (Open 24 hours)</li>
+                <li className="opendays">Monday (Open 24 hours)</li>
+                <li className="opendays">Tuesday (Open 24 hours)</li>
+                <li className="opendays">Wednesday (Open 24 hours)</li>
+                <li className="opendays">Thursday (Open 24 hours)</li>
+                <li className="opendays">Friday (Open 24 hours)</li>
+                <li className="opendays">Saturday (Open 24 hours)</li>
+                <li className="opendays">Sunday (Open 24 hours)</li>
               </ul>
             </div>
           </Col>
         </Row>
         {/* Comment Section */}
-        <Row className="bottomBorder">
-          <Col xs="12" md="12" lg="6" className="comment">
+        <Row className="bottomBorder py-3">
+          <Col xs="12" md="12" lg="12" className="comment">
             <FloatingLabel
               controlId="floatingTextarea2"
               label="Leave a comment here"
@@ -99,53 +102,74 @@ function Footer() {
               <Form.Control
                 as="textarea"
                 placeholder="Leave a comment here"
-                style={{ width: "400px", height: "150px" }}
+                style={{ height: "150px" }}
+                className="commentBox"
               />
               <Button variant="success" type="submit" className="m-3">
-                Submit
+                Send Comment
               </Button>
             </FloatingLabel>
           </Col>
-          <Col xs="12" md="12" lg="6" className="worldMap">
-            <FontAwesomeIcon
-              icon={faFacebook}
-              className="footer-icons"
-              id="facebook"
-            ></FontAwesomeIcon>
-            <FontAwesomeIcon
-              icon={faInstagram}
-              className="footer-icons"
-              id="instagram"
-            ></FontAwesomeIcon>
-            <FontAwesomeIcon
-              icon={faTwitter}
-              className="footer-icons"
-              id="twitter"
-            ></FontAwesomeIcon>
-            <FontAwesomeIcon
-              icon={faLinkedin}
-              className="footer-icons"
-              id="linkedin"
-            ></FontAwesomeIcon>
-            <FontAwesomeIcon
-              icon={faWhatsapp}
-              className="footer-icons"
-              id="whatsapp"
-            ></FontAwesomeIcon>
+          {/* Social media handles */}
+          <Col xs="12" md="12" lg="12">
+            <div className="footer-icons-parent">
+              <a href="/fb" type="button" target="_blank">
+                <FontAwesomeIcon
+                  icon={faFacebook}
+                  className="footer-icons"
+                  id="facebook"
+                ></FontAwesomeIcon>
+              </a>
+              <a href="/in" type="button" target="_blank">
+                <FontAwesomeIcon
+                  icon={faInstagram}
+                  className="footer-icons"
+                  id="instagram"
+                ></FontAwesomeIcon>
+              </a>
+              <a href="/tw" type="button" target="_blank">
+                <FontAwesomeIcon
+                  icon={faTwitter}
+                  className="footer-icons"
+                  id="twitter"
+                ></FontAwesomeIcon>
+              </a>
+              <a href="/li" type="button" target="_blank">
+                <FontAwesomeIcon
+                  icon={faLinkedin}
+                  className="footer-icons"
+                  id="linkedin"
+                ></FontAwesomeIcon>
+              </a>
+              <a href="https://wa.link/23q0pz" type="button" target="_blank">
+                <FontAwesomeIcon
+                  icon={faWhatsapp}
+                  className="footer-icons"
+                  id="whatsapp"
+                ></FontAwesomeIcon>
+              </a>
+            </div>
           </Col>
         </Row>
-        <Row>
+        {/* Right Protection */}
+        <Row style={{ color: " rgb(58, 58, 58)" }}>
           <Col xs="12" md="12" lg="12">
-            <p>
-              <FontAwesomeIcon icon={faGlobe}></FontAwesomeIcon> Terms of
-              service | Private Policy
-            </p>
+            <div className="right-protection-parent">
+              <p>
+                <FontAwesomeIcon icon={faGlobe}></FontAwesomeIcon>
+                &nbsp;Terms of service | Private Policy
+              </p>
+            </div>
           </Col>
-          <Col xs="12" md="12" lg="12" className="">
-            <div>
-              <img src={brandlogotranswhite} alt="" />
-                <p  style={{ display: "inline-block" }}>Akwaaba Community Pharmacy</p> <br />
-                <p  style={{ display: "inline-block" }}>Copyright &copy; {year} | All rights reserved.</p>
+          <Col xs="12" md="12" lg="12">
+            <div className="right-protection-parent">
+              <p>
+                <img src={brandlogotranswhite} alt="" />
+                Akwaaba Community Pharmacy
+              </p>
+            </div>
+            <div className="right-protection-parent">
+              <p>Copyright &copy; {year} | All rights reserved.</p>
             </div>
           </Col>
         </Row>

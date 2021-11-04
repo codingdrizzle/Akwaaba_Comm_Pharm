@@ -16,3 +16,9 @@
     display: inline-block;
     margin-left: 5px;
 }
+
+@media screen and (max-width:450px){
+    .c-brand-text{
+        font-size: 10px;
+    }
+}
