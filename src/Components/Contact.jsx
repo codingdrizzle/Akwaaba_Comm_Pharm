@@ -31,7 +31,7 @@ function Contact() {
         </Col>
         <Col xs={12} lg={6} className="my-1">
           <h3 className="title">Location Details</h3>
-          <Row className="">
+          <Row className="mx-auto">
             <Col xs={12} md={12} className="my-2">
               <img src={flag} alt="hello" />
               <span className="title mx-2">Country : Ghana</span>

@@ -98,11 +98,12 @@ function Footer() {
             <FloatingLabel
               controlId="floatingTextarea2"
               label="Leave a comment here"
+              style={{color: "white"}}
             >
               <Form.Control
                 as="textarea"
                 placeholder="Leave a comment here"
-                style={{ height: "150px" }}
+                style={{ height: "150px", color:"white" }}
                 className="commentBox"
               />
               <Button variant="success" type="submit" className="m-3">
