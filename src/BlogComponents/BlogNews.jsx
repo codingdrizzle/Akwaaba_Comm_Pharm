@@ -1,8 +1,16 @@
-function BlogNews(){
-    return(
-        <>
-        </>
-    );
-}
+import React, { useState } from "react";
+import { Row, Col } from "react-bootstrap";
+import NewPost from "./PostTypes/NewPost";
 
-export default BlogNews
+export default function BlogNews() {
+  return (
+    <>
+      <Row>
+        <Col>
+          <h3 className="news-blog-caption">Blog NewsFeed</h3>
+        </Col>
+      </Row>
+     <NewPost />
+    </>
+  );
+}

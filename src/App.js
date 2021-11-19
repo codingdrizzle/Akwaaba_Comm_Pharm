@@ -12,21 +12,22 @@ import Blog from "../src/BlogComponents/Blog";
 
 function App() {
   return (
-    <Router>
-      <div>
-        <NavBar />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/news-feed" component={NewsFeed} />
-          <Route path="/health-tips" component={HealthTips} />
-          <Route path="/contact" component={Contact} />
-          <Home />
-        </Switch>
-        <Footer />
-        {/* <Route path="/blog" component={Blog} /> */}
-      </div>
-    </Router>
+    // <Router>
+    //   <div>
+    //     <NavBar />
+    //     <Switch>
+    //       <Route path="/" exact component={Home} />
+    //       <Route path="/about" component={About} />
+    //       <Route path="/news-feed" component={NewsFeed} />
+    //       <Route path="/health-tips" component={HealthTips} />
+    //       <Route path="/contact" component={Contact} />
+    //     {/* <Route path="/blog" component={Blog} /> */}
+    //       <Home />
+    //     </Switch>
+    //     <Footer />
+    //   </div>
+    // </Router>
+        <Blog/>
   );
 }
 

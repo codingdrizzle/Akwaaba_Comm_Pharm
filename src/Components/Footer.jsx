@@ -142,7 +142,7 @@ function Footer() {
                   id="linkedin"
                 ></FontAwesomeIcon>
               </a>
-              <a href="https://wa.link/23q0pz" type="button" target="_blank">
+              <a href="https://wa.link/23q0pz" type="button" target="_blank" rel="noreferrer">
                 <FontAwesomeIcon
                   icon={faWhatsapp}
                   className="footer-icons"
