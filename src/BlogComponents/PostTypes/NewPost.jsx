@@ -21,7 +21,11 @@ export default function NewPost() {
   const [titleUpdate, setTitle] = useState("");
   const [textUpdate, setText] = useState("");
   const [publisherUpdate, setPublisher] = useState("");
+  const [src, setSrc] = useState("");
+
+  // Refs
   const titleChanges = useRef(null);
+  const imgChanges = useRef(null);
   const textChanges = useRef(null);
   const publisherChanges = useRef(null);
 
@@ -34,24 +38,39 @@ export default function NewPost() {
         : `Published by "${publisherChanges.current.value}"`
     );
   };
+  
+
+  const inpFile = ()=>{
+    const file = imgChanges.current.files[0];
+
+    if(file){
+      const reader = new FileReader();
+
+      reader.addEventListener('load', ()=>{
+        setSrc(reader.result)
+      })
+      reader.readAsDataURL(file); 
+    }
+  }
+  // imgChanges.current.addEventListener('change', inpFile)
   return (
     <>
       <Row>
-        <Col className="m-5">
-          <Row className="my-4">
-            <Col xs="12" md="12" lg="6" className="details-area p-5 pt-0">
-              <Row className="my-3">
-                <Col xs="12" md="12" lg="12">
-                  <h4 className="type-caption">New Post</h4>
-                </Col>
-              </Row>
-              <Form action="" method="" className="">
+        <Col className="mx-5">
+          <Form action="#" method="POST" className="">
+            <Row className="my-4 p-2 details-area">
+              <Col xs="12" md="12" lg="6" className="details-area pt-0">
+                <Row className="my-3">
+                  <Col xs="12" md="12" lg="12">
+                    <h4 className="type-caption">New Post</h4>
+                  </Col>
+                </Row>
                 <Form.Group className="mb-3">
                   <Form.Control
                     type="file"
                     accept=".png, .jpg, .jpeg .gif .icom"
-                    ref={titleChanges}
-                    onChange={trackChanges}
+                    ref={imgChanges}
+                    onChange={inpFile}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -89,38 +108,41 @@ export default function NewPost() {
                     className="text-center"
                   />
                 </Form.Group>
-              </Form>
-            </Col>
-            <Col xs="12" md="12" lg="6" className="mt-2 p-4">
-              <Row className="my-3">
-                <Col xs="12" md="12" lg="12">
-                  <h4 className="preview-caption">Post Preview</h4>
-                </Col>
-              </Row>
-              <PreviewCard
-                img=""
-                title={titleUpdate}
-                text={textUpdate}
-                publisher={publisherUpdate}
-                daystamp={daystamp}
-                datestamp={datestamp}
-                timestamp={timestamp}
-              />
-            </Col>
-            <Col xs="12" md="12" lg="12" className="mt-2">
-              <div className="publish-btn-parent">
-                <Button variant="primary" type="submit" className="publish-btn">
-                  Publish Post &nbsp;
-                  <FontAwesomeIcon
-                    icon={faPaperPlane}
-                    size=""
-                  ></FontAwesomeIcon>
-                </Button>
-              </div>
-            </Col>
-          </Row>
+              </Col>
+              <Col xs="12" md="12" lg="6" className="mt-2">
+                <Row className="my-3">
+                  <Col xs="12" md="12" lg="12">
+                    <h4 className="preview-caption">Post Preview</h4>
+                  </Col>
+                </Row>
+                <PreviewCard
+                  img={src}
+                  title={titleUpdate}
+                  text={textUpdate}
+                  publisher={publisherUpdate}
+                  daystamp={daystamp}
+                  datestamp={datestamp}
+                  timestamp={timestamp}
+                />
+              </Col>
+              <Col xs="12" md="12" lg="12" className="mt-4">
+                <div className="publish-btn-parent">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    className="publish-btn"
+                  >
+                    Publish Post &nbsp;
+                    <FontAwesomeIcon
+                      icon={faPaperPlane}
+                    ></FontAwesomeIcon>
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </Form>
         </Col>
       </Row>
     </>
   );
-} 
+}

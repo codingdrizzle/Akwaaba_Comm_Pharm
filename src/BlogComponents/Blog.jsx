@@ -9,16 +9,16 @@ import BlogTips from "./BlogTips";
 function Blog() {
   return (
     <>
-      {/* <Router>
+      <Router>
           <BlogNav/>
         <Switch>
           <Route path="/login" component={BlogLogin} />
           <Route path="/blognews" component={BlogNews} />
           <Route path="/blogtips" component={BlogTips} />
         </Switch>
-      </Router> */}
+      </Router>
       {/* <BlogLogin /> */}
-      <BlogNews />
+      {/* <BlogNews /> */}
     </>
   );
 }
