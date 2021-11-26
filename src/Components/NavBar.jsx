@@ -3,6 +3,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import "../ComponentStyles/NavBar.css";
 import brandlogo from "../Images/brandlogo.png";
 
+
 function NavBar() {
   const styleLink = {
     textDecoration : 'none'

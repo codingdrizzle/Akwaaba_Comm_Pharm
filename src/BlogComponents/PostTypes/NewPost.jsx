@@ -3,7 +3,8 @@ import { Row, Col, Form, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import "../../BlogComponentStyles/BlogNews.css";
-import PreviewCard from "../PreviewCard";
+import PreviewCard from "../PreviewCard"; 
+
 
 const dayName = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 const D = new Date();
@@ -42,7 +43,6 @@ export default function NewPost() {
 
   const inpFile = ()=>{
     const file = imgChanges.current.files[0];
-
     if(file){
       const reader = new FileReader();
 
@@ -50,6 +50,9 @@ export default function NewPost() {
         setSrc(reader.result)
       })
       reader.readAsDataURL(file); 
+    }else{
+      setSrc(null);
+      imgChanges.current.value = null
     }
   }
   // imgChanges.current.addEventListener('change', inpFile)
