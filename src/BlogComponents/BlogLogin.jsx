@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Row, Col, Card, Form, Button } from "react-bootstrap";
+import {Link} from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faLock } from "@fortawesome/free-solid-svg-icons";
 import "../BlogComponentStyles/BlogLogin.css";
 function BlogLogin() {
   const [icon, setIcon] = useState(faEye);
@@ -23,10 +24,18 @@ function BlogLogin() {
     <div className="login-page">
       <Row>
         <Col xs="12" md="12" lg="12">
-          <Card>
-            <h3 className="login-caption">BLOG LOGIN</h3>
+          <Card className="shadow p-4">
+            <div className="login-head">
+              <FontAwesomeIcon
+                icon={faLock}
+                className="lockIcon"
+                onClick={toggleView}
+                ref={changeIcon}
+              ></FontAwesomeIcon>
+              <h3 className="login-caption">LOGIN</h3>
+            </div>
             <Card.Body>
-              <Form action="" method="" className="login-form">
+              <Form action="#" method="GET" className="login-form">
                 <Form.Group className="mb-3">
                   <Form.Control
                     type="username"
@@ -35,7 +44,6 @@ function BlogLogin() {
                     id="username-input"
                   />
                 </Form.Group>
-                
                 <Form.Group className="mb-3">
                   <Form.Control
                     type="password"
@@ -45,18 +53,25 @@ function BlogLogin() {
                     ref={viewPassword}
                   />
                   <div className="eye">
-
-                       <FontAwesomeIcon
-                  icon={icon}
-                  className="eyeIcon"
-                  onClick={toggleView}
-                  ref={changeIcon}
-                ></FontAwesomeIcon>
+                    <FontAwesomeIcon
+                      icon={icon}
+                      className="eyeIcon"
+                      onClick={toggleView}
+                      ref={changeIcon}
+                    ></FontAwesomeIcon>
                   </div>
                 </Form.Group>
                 <Button variant="primary" type="submit" id="login-btn">
                   Login
                 </Button>
+                <div className="login-foot">
+                  <Link to="/admin/forgot-password">
+                  <p className="forgot"><a href="/#">Forgot Password ?</a></p>
+                  </Link>
+                  <Link to="/admin/signup">
+                  <p className="signup"><a href="/#">SignUp</a></p>
+                  </Link>
+                </div>
               </Form>
             </Card.Body>
           </Card>
@@ -65,5 +80,4 @@ function BlogLogin() {
     </div>
   );
 }
-
 export default BlogLogin;
