@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import NewPost from "./PostTypes/NewPost";
+import {NewPost} from "./PostTypes/NewPost";
 
 export default function BlogTips() {
   return (
@@ -10,7 +10,7 @@ export default function BlogTips() {
           <h3 className="news-blog-caption">Blog Health Tips</h3>
         </Col>
       </Row>
-     <NewPost />
+     <NewPost endPoint="http://localhost:8080/health-tips"/>
     </>
   );
 }

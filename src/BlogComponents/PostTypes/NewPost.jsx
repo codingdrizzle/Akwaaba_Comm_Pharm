@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import "../../BlogComponentStyles/BlogNews.css";
-import PreviewCard from "../PreviewCard"; 
-
+import PreviewCard from "../PreviewCard";
 
 const dayName = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 const D = new Date();
@@ -12,24 +12,37 @@ let day = D.getDay();
 let date = D.getDate();
 let month = D.getMonth();
 let year = D.getFullYear();
-let hour = D.getHours();
-let minute = D.getMinutes().toString();
-minute = minute.length === 1 ? `0${minute}` : `${minute}`;
 const daystamp = `${dayName[day]}`;
-const datestamp = `${date}/${month}/${year}`;
-const timestamp = `${hour}:${minute}`;
-export default function NewPost() {
+const datestamp = `${date}/${month+1}/${year}`;
+const stamp = `${daystamp}, ${datestamp}`
+export function NewPost(props) {
   const [titleUpdate, setTitle] = useState("");
   const [textUpdate, setText] = useState("");
   const [publisherUpdate, setPublisher] = useState("");
+  const [stampUpdate, setStamp] = useState("");
   const [src, setSrc] = useState("");
 
   // Refs
-  const titleChanges = useRef(null);
   const imgChanges = useRef(null);
+  const titleChanges = useRef(null);
   const textChanges = useRef(null);
   const publisherChanges = useRef(null);
+  const stampChanges = useRef(null);
+  const extract = useRef(null);
 
+  function extractData() {
+    const data = {
+      img: imgChanges.current.value,
+      title: titleChanges.current.value,
+      text: textChanges.current.value,
+      publisher: publisherChanges.current.value,
+      publish_date: stampChanges.current.value
+    };
+
+    axios.post(props.endPoint, data)
+    .then((data)=>console.log("posted" + data))
+    .catch(err => console.error(err))
+  }
   const trackChanges = () => {
     setTitle(titleChanges.current.value);
     setText(textChanges.current.value);
@@ -38,29 +51,36 @@ export default function NewPost() {
         ? `${publisherChanges.current.value}`
         : `Published by "${publisherChanges.current.value}"`
     );
+    setStamp(stamp)
   };
-  
 
-  const inpFile = ()=>{
+  const inpFile = () => {
     const file = imgChanges.current.files[0];
-    if(file){
+    if (file) {
       const reader = new FileReader();
 
-      reader.addEventListener('load', ()=>{
-        setSrc(reader.result)
-      })
-      reader.readAsDataURL(file); 
-    }else{
+      reader.addEventListener("load", () => {
+        setSrc(reader.result);
+      });
+      reader.readAsDataURL(file);
+    } else {
       setSrc(null);
-      imgChanges.current.value = null
+      imgChanges.current.value = null;
     }
-  }
+  };
   // imgChanges.current.addEventListener('change', inpFile)
   return (
     <>
       <Row>
         <Col className="mx-5">
-          <Form action="#" method="POST" className="">
+          <Form
+            action="#"
+            method=""
+            className=""
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
             <Row className="my-4 p-2 details-area">
               <Col xs="12" md="12" lg="6" className="details-area pt-0">
                 <Row className="my-3">
@@ -107,8 +127,9 @@ export default function NewPost() {
                     type="text"
                     readOnly
                     disabled
-                    value={`Published on ${daystamp}, ${datestamp}  -${timestamp}-`}
+                    value={`Published on ${stamp}`}
                     className="text-center"
+                    ref={stampChanges}
                   />
                 </Form.Group>
               </Col>
@@ -123,9 +144,7 @@ export default function NewPost() {
                   title={titleUpdate}
                   text={textUpdate}
                   publisher={publisherUpdate}
-                  daystamp={daystamp}
-                  datestamp={datestamp}
-                  timestamp={timestamp}
+                  stamp={stampUpdate}
                 />
               </Col>
               <Col xs="12" md="12" lg="12" className="mt-4">
@@ -134,11 +153,11 @@ export default function NewPost() {
                     variant="primary"
                     type="submit"
                     className="publish-btn"
+                    ref={extract}
+                    onClick={extractData}
                   >
                     Publish Post &nbsp;
-                    <FontAwesomeIcon
-                      icon={faPaperPlane}
-                    ></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
                   </Button>
                 </div>
               </Col>

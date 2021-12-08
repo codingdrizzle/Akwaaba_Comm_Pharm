@@ -12,8 +12,8 @@ function BlogRoute() {
     <Router>
       <BlogNav />
       <Switch>
-        <Route path="/admin/blognews" exact component={BlogNews} />
-        <Route path="/admin/blogtips" exact component={BlogTips} />
+        <Route path="/blognews" exact component={BlogNews} />
+        <Route path="/blogtips" exact component={BlogTips} />
       </Switch>
     </Router>
   );

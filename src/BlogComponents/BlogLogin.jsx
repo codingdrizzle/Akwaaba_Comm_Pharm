@@ -1,25 +1,45 @@
 import React, { useRef, useState } from "react";
 import { Row, Col, Card, Form, Button } from "react-bootstrap";
-import {Link} from "react-router-dom"
+import {Link, Redirect, useHistory} from "react-router-dom"
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash, faLock } from "@fortawesome/free-solid-svg-icons";
 import "../BlogComponentStyles/BlogLogin.css";
 function BlogLogin() {
   const [icon, setIcon] = useState(faEye);
-  const viewPassword = useRef(null);
+  const Username = useRef(null);
+  const Password = useRef(null);
   const changeIcon = useRef(null);
   const toggleView = () => {
     let type;
-    if (viewPassword.current.getAttribute("type") === "password") {
+    if (Password.current.getAttribute("type") === "password") {
       type = "text";
-      viewPassword.current.setAttribute("type", type);
+      Password.current.setAttribute("type", type);
       setIcon(faEyeSlash);
     } else {
       type = "password";
-      viewPassword.current.setAttribute("type", type);
+      Password.current.setAttribute("type", type);
       setIcon(faEye);
     }
   };
+
+  const history = useHistory();
+  const authUser = ()=>{
+    axios.get("http://localhost:8080/users")
+    .then((res)=>{
+      const Users = [...res.data]
+      for(let i=0; i<Users.length;i++){
+        if(Username.current.value === Users[i].username && Password.current.value === Users[i].password){
+          console.log('Valid User');
+          history.push("/admin/blogs");
+          <Redirect to="/admin/blogs"/>
+        }else{
+          alert("Invalid Username or Password. Try again!")
+          console.log("Sorry!! YOu're an Alien")
+        }
+      }
+    })
+  }
   return (
     <div className="login-page">
       <Row>
@@ -35,13 +55,14 @@ function BlogLogin() {
               <h3 className="login-caption">LOGIN</h3>
             </div>
             <Card.Body>
-              <Form action="#" method="GET" className="login-form">
+              <Form action="#" method="GET" className="login-form" onSubmit={(e)=>e.preventDefault()}>
                 <Form.Group className="mb-3">
                   <Form.Control
                     type="username"
                     placeholder="Username"
                     className="inputs"
                     id="username-input"
+                    ref={Username}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -50,7 +71,7 @@ function BlogLogin() {
                     placeholder="Password"
                     className="inputs"
                     id="password-input"
-                    ref={viewPassword}
+                    ref={Password}
                   />
                   <div className="eye">
                     <FontAwesomeIcon
@@ -61,7 +82,7 @@ function BlogLogin() {
                     ></FontAwesomeIcon>
                   </div>
                 </Form.Group>
-                <Button variant="primary" type="submit" id="login-btn">
+                <Button variant="primary" type="submit" id="login-btn" onClick={authUser}>
                   Login
                 </Button>
                 <div className="login-foot">

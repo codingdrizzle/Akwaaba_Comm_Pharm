@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 export default function NewsCard(props) {
-  const { img, title, text, publisher, daystamp, datestamp, timestamp } = props;
+  const { img, title, text, publisher, stamp} = props;
   return (
     <Card className="shadow">
       <Card.Img variant="top" src={img}></Card.Img>
@@ -13,8 +13,7 @@ export default function NewsCard(props) {
             <strong>{publisher}</strong>
           </p>
           <p className="date-stamp">
-            <span className="bold">{daystamp}, </span>
-            {datestamp} &nbsp;&nbsp;-{timestamp}-
+            <strong>{stamp}</strong>
           </p>
         </Card.Footer>
       </Card.Body>
