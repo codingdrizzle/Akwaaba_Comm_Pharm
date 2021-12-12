@@ -40,7 +40,7 @@ export default function NewsFeed() {
           {items.map((item) => (
             <Cardi
             key={item._id}
-              img={nicer}
+              img={item.news_image}
               title={item.news_title}
               text={item.news_text}
               publisher={item.publisher}

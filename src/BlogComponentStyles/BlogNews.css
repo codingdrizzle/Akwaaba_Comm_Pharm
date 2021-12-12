@@ -62,3 +62,22 @@
     padding: 10px;
     border-radius: 10px;
 }
+*:focus {
+  outline-width: 0 !important;
+  outline: none !important;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+.inputs{
+  border-width: 2px;
+  border-style: solid;
+    transition: border 1s ease-in-out;
+}
+button[type="submit"]:active,
+.inputs:active,
+.inputs:focus {
+  outline: none !important;
+  border: 2px solid rgba(43, 86, 4, 0.8);
+  box-shadow: none;
+}

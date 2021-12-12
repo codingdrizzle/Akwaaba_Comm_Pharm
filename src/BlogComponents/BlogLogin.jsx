@@ -72,7 +72,7 @@ function BlogLogin() {
                     className="inputs"
                     id="password-input"
                     ref={Password}
-                  />
+                  /> 
                   <div className="eye">
                     <FontAwesomeIcon
                       icon={icon}

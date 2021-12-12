@@ -30,20 +30,12 @@ export function NewPost(props) {
   const stampChanges = useRef(null);
   const extract = useRef(null);
 
-  function extractData() {
-    const data = {
-      img: imgChanges.current.value,
-      title: titleChanges.current.value,
-      text: textChanges.current.value,
-      publisher: publisherChanges.current.value,
-      publish_date: stampChanges.current.value
-    };
-
-    axios.post(props.endPoint, data)
-    .then((data)=>console.log("posted" + data))
-    .catch(err => console.error(err))
-  }
   const trackChanges = () => {
+    if(titleChanges.current.value !== "" && textChanges.current.value !== "" && publisherChanges.current.value !== "" &&  imgChanges.current.files.length !== 0){
+      extract.current.disabled = false
+    }else{
+      extract.current.disabled = true
+    }
     setTitle(titleChanges.current.value);
     setText(textChanges.current.value);
     setPublisher(
@@ -55,6 +47,12 @@ export function NewPost(props) {
   };
 
   const inpFile = () => {
+        if(imgChanges.current.files.length !== 0){
+      extract.current.disabled = false
+    }else{
+      extract.current.disabled = true
+    }
+    console.log(imgChanges.current.files)
     const file = imgChanges.current.files[0];
     if (file) {
       const reader = new FileReader();
@@ -67,15 +65,32 @@ export function NewPost(props) {
       setSrc(null);
       imgChanges.current.value = null;
     }
-  };
-  // imgChanges.current.addEventListener('change', inpFile)
+  }
+    function extractData() {
+    console.log('clicked  ')
+    if(extract.current.disabled === true){
+      alert("Fill in all blanks!")
+    }
+    const data = {
+      image: imgChanges.current.files[0],
+      title: titleChanges.current.value,
+      text: textChanges.current.value,
+      publisher: publisherChanges.current.value,
+      publish_date: stampChanges.current.value
+    };
+
+    axios.post(props.endPoint, data)
+    .then((data)=>console.log("posted" + data))
+    .catch(err => console.error(err))
+  }
   return (
     <>
       <Row>
         <Col className="mx-5">
           <Form
-            action="#"
-            method=""
+            action=""
+            method="POST"
+            encType="multipart/form-data"
             className=""
             onSubmit={(e) => {
               e.preventDefault();
@@ -91,9 +106,11 @@ export function NewPost(props) {
                 <Form.Group className="mb-3">
                   <Form.Control
                     type="file"
+                    name="image"
                     accept=".png, .jpg, .jpeg .gif .icom"
                     ref={imgChanges}
                     onChange={inpFile}
+                    className="inputs"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -102,17 +119,19 @@ export function NewPost(props) {
                     placeholder="News Title"
                     ref={titleChanges}
                     onChange={trackChanges}
+                    className="inputs"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Control
+                    type="text"
                     as="textarea"
                     rows={3}
                     placeholder="News Text"
                     ref={textChanges}
                     onChange={trackChanges}
+                    className="inputs"
                   />
-                  <Form.Control />
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Control
@@ -120,6 +139,7 @@ export function NewPost(props) {
                     placeholder="Name of Publisher"
                     ref={publisherChanges}
                     onChange={trackChanges}
+                    className="inputs"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -128,7 +148,7 @@ export function NewPost(props) {
                     readOnly
                     disabled
                     value={`Published on ${stamp}`}
-                    className="text-center"
+                    className="text-center inputs"
                     ref={stampChanges}
                   />
                 </Form.Group>
@@ -152,7 +172,7 @@ export function NewPost(props) {
                   <Button
                     variant="primary"
                     type="submit"
-                    className="publish-btn"
+                    className="publish-btn inputs"
                     ref={extract}
                     onClick={extractData}
                   >

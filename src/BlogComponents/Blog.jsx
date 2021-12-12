@@ -4,16 +4,18 @@ import BlogLogin from "./BlogLogin";
 import BlogNav from "./BlogNav";
 import BlogNews from "./BlogNews";
 import BlogTips from "./BlogTips";
-import BlogForgot from "./Forgot-password"
+import BlogForgot from "./Forgot-password";
 import BlogSignup from "./BlogSignup";
+import AdminHome from "./AdminHome";
 
 function BlogRoute() {
   return (
     <Router>
       <BlogNav />
       <Switch>
-        <Route path="/blognews" exact component={BlogNews} />
-        <Route path="/blogtips" exact component={BlogTips} />
+        <Route path="/admin/blogs" exact component={AdminHome} />
+        <Route path="/admin/blogs/blognews" exact component={BlogNews} />
+        <Route path="/admin/blogs/blogtips" exact component={BlogTips} />
       </Switch>
     </Router>
   );
@@ -22,15 +24,7 @@ function BlogRoute() {
 function Blog() {
   return (
     <>
-      {/* <Router>
-        <BlogNav />
-        <Switch>
-          <Route path="/admin/login" component={BlogLogin} />
-          <Route path="/admin/blognews" component={BlogNews} />
-          <Route path="/admin/blogtips" component={BlogTips} />
-        </Switch>
-      </Router> */}
-        <Router>
+      <Router>
         <Switch>
           <Route path="/admin" exact component={BlogLogin} />
           <Route path="/admin/forgot-password" exact component={BlogForgot} />

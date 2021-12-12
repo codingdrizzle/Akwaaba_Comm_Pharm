@@ -16,7 +16,7 @@ function BlogNav() {
         expand="lg"
       >
         <Container>
-          <Link style={{ styleLink }} to="/">
+          <Link style={{ styleLink }} to="/admin/blogs">
             <Navbar.Brand href="#blog" className="">
               <img src={brandlogo} alt="" width="50px" />
               <a href="/blog" className="c-brand-text">
@@ -27,13 +27,13 @@ function BlogNav() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Link style={styleLink} to="/blognews">
-                <Nav.Link href="/blognews" className="links">
+              <Link style={styleLink} to="/admin/blogs/blognews">
+                <Nav.Link href="/admin/blogs/blognews" className="links">
                   Blog News
                 </Nav.Link>
               </Link>
-              <Link style={styleLink} to="/blogtips">
-                <Nav.Link href="/blogtips" className="links">
+              <Link style={styleLink} to="/admin/blogs/blogtips">
+                <Nav.Link href="/admin/blogs/blogtips" className="links">
                   Blog Tips
                 </Nav.Link>
               </Link>
