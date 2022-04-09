@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const MongoClient = require("mongodb").MongoClient;
 const bcrypt = require("bcryptjs");
+const passport = require('passport');
 
 var url = "mongodb://localhost:27017";
 var database;
@@ -25,45 +26,58 @@ router.get("/user", (req, res) => {
 
 // Register Handle
 router.post("/register", (req, res) => {
-  const { email, username, password, re_password } = req.body;
+  const { email, username, password } = req.body;
   database
     .collection("users")
     .findOne({ email: email })
-    .then((email) => {
-      if (email) {
-        console.log(email + " already exists");
+    .then((user) => {
+      if (user) {
+        console.log(user + " already exists");
       } else {
-        const newUser = { 
-          email: req.body.email,
+        const newUser = {
+          email: email,
           username: username,
           password: password,
         };
         bcrypt.genSalt(10, (err, salt) => {
-        if (err) throw err;
+          if (err) throw err;
           bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) console.error(err);
 
             newUser.password = hash;
 
             database
-            .collection("users")
-            .insertOne(newUser)
-            .then(user => {
-                console.log('User added successfully\n'+user)
-            })
-            .catch((err) => console.error(err))
-          })
-        }
-        )
+              .collection("users")
+              .insertOne(newUser)
+              .then((user) => {
+                console.log("User added successfully\n" + user);
+              })
+              .catch((err) => console.error(err));
+          });
+        });
       }
     })
     .catch((err) => console.error(err));
-  res.send("Register Page");
 });
 
 // Login Handle
 router.get("/login", (req, res) => {
   res.send("Login Page");
+});
+
+// router.post('/login', (req, res, next) => {
+//   console.log('Request to Login route')
+//   passport.authenticate('local', {
+//     // successRedirect: 'http://localhost:3000/admin',
+//     // failureRedirect: 'http://localhost:3000/admin',
+//   })(req, res, next);
+// });
+
+router.post('/login', passport.authenticate('local'), (req, res) => {
+  console.log('was a success')
+  // res.redirect('http://localhost:3000')
+  res.redirect('/users/user')
+  console.log(req.user.username)
 });
 
 module.exports = router;
